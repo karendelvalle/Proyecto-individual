@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+
+      {% block content %}
+        <!--Formulario CREAR EVENTO-->
+        
+        <div class="p-3 mb-2 bg-secondary text-white" style="background: url(static/img/bici_playa.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+        <div class="container p-3 my-3 bg-dark text-white" style="background: url(static/img/bicicletas_bienvenida.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+            <h2>Crear evento</h2>
+            <a href="/cicletealo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                </svg></a>
+            
+
+            <form action="/cicletealo" method="POST">
+                {% csrf_token %}
+                <form class="row g-3">
+                    <div class="col-md-6">  
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <label for="inputEmail4" class="form-label">Nombre evento:</label>
+                    <input type="text" name="nombre" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Lugar de encuentro</label>
+                    <input type="text" name="encuentro" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Lugar de termino</label>
+                    <input type="text" name="termino" class="form-control" id="inputAddress">
+                    </div>
+                    <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Ruta</label>
+                    <input type="text" name="ruta" class="form-control" id="inputAddress2">
+                    </div>
+                    <div class="col-md-4">
+                    <label for="inputCity" class="form-label">Fecha</label>
+                    <input type="date" name="fecha" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-4">
+                    <label for="inputCity" class="form-label">Hora</label>
+                    <input type="time" name="hora" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-4">
+                    <label for="inputState" class="form-label">Dificultad</label>
+                    <select  name="dificultad" id="inputState" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select><br>
+                    </div>
+                    <div class="col-12">
+                    <button type="submit" class="btn btn-dark ">Crear</button>
+                    </div>
+                </form>
+            </form> 
+            </div>
+        </div>
+        </div>
+        {% endblock %}

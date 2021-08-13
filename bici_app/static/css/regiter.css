@@ -1,0 +1,11 @@
+
+.contenedor{
+    background-color: rgb(5, 5, 5);
+    background-image:url('/static/img/bicicletas_bienvenida.jpg ');
+    width:100vw;
+    height:100vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+

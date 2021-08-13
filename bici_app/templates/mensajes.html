@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="p-3 mb-2 bg-secondary text-white" style="background: url(static/img/bic.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+        
+        <div class="container p-3 my-3 bg-white text-dark">
+            <h1>Mensajes de Evento: {{evento.nombre}}</h1>
+            <a href="/cicletealo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+              </svg></a><br><br>
+        </div>
+        
+        <div class="container p-3 my-3 bg-dark text-white">     
+            <form action="/mensajes/{{evento.id}}" method="POST">
+                {% csrf_token %}
+                <div class="col-md-6">
+                <p>Mensaje: <input type='text' name="mensaje" id="" cols="30" rows="10" class="form-control" id="inputEmail4"></input></p>
+                <input type="submit" value="Enviar"><br><br>
+            </form>
+                   
+                    <!--Imprimir mensajes-->
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% for mensaje in mensajes %}                    
+                    <p>Mensaje de {{mensaje.user.first_name}} {{mensaje.user.last_name}}: {{mensaje.message}}</p>
+                    {% for comment in mensaje.message_comments.all %}
+                    <p>Comentario de {{users.first_name}} {{users.last_name}}: {{comment}}</p>
+                    {% endfor%}
+
+
+                    <form action="/comentar_mensaje/{{mensaje.id}}" method="POST">
+                        {% csrf_token %}
+                        <p>Comentario: <input type='text' name="comentar_mensaje" id="" cols="30" rows="10" class="form-control" id="inputEmail4"></input></p>
+                        <input type="hidden" name="mensaje_id" value="{{mensaje.id}}">
+                        <input type="hidden" name="evento_id" value="{{evento.id}}">
+                        <input type="submit" value="comentar"><br><br>
+                    </form>
+                    
+                    <form action="/delete/{{mensaje.id}}" method="POST">
+                        {% csrf_token %}
+                        <input type='hidden' name="borrar_mensaje" id="" cols="30" rows="10" class="form-control" id="inputEmail4"></input>
+                        <input type="hidden" name="evento_id" value="{{evento.id}}">
+                        <input type="submit" value="Borrar"><br><br>
+                    </form>   
+                {% endfor%}
+                </div>                            
+        </div>
+        {% endblock %}
