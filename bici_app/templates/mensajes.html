@@ -27,7 +27,7 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                    {% for mensaje in mensajes %}                    
+                    {% for mensaje in mensajes %}              
                     <p>Mensaje de {{mensaje.user.first_name}} {{mensaje.user.last_name}}: {{mensaje.message}}</p>
                     {% for comment in mensaje.message_comments.all %}
                     <p>Comentario de {{users.first_name}} {{users.last_name}}: {{comment}}</p>
@@ -41,14 +41,28 @@
                         <input type="hidden" name="evento_id" value="{{evento.id}}">
                         <input type="submit" value="comentar"><br><br>
                     </form>
-                    
+                    <!--BORRAR MENSAJE-->
+                    {% if request.session.id == evento.creador.id %}
                     <form action="/delete/{{mensaje.id}}" method="POST">
                         {% csrf_token %}
                         <input type='hidden' name="borrar_mensaje" id="" cols="30" rows="10" class="form-control" id="inputEmail4"></input>
                         <input type="hidden" name="evento_id" value="{{evento.id}}">
                         <input type="submit" value="Borrar"><br><br>
-                    </form>   
+                    </form>
+                    {%endif%}   
                 {% endfor%}
-                </div>                            
+
+                <!--BORRAR COMENTARIO-->
+                {% if request.session.id == evento.creador.id %}
+                <form action="/delete/{{mensaje.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type='hidden' name="borrar_mensaje" id="" cols="30" rows="10" class="form-control" id="inputEmail4"></input>
+                    <input type="hidden" name="evento_id" value="{{evento.id}}">
+                    <input type="submit" value="Borrar"><br><br>
+                </form>
+                {%endif%} 
+                </div>      
+
+
         </div>
         {% endblock %}

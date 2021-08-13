@@ -29,15 +29,7 @@ def register(request):
 
 def ejemplo(request):
     return render(request, "ejemplo.html")    
-#def success(request):
- #      user_id=request.session['id']
-  #      user= User.objects.get(id=user_id)
-   #     context={
-    #        'name': f'{user.first_name} {user.last_name}'
-     #   }
-      #  return render(request, 'success.html', context)
-   # else:
-    #    return redirect("/")
+
 
 def login(request):
     if request.method == 'POST':
@@ -62,7 +54,7 @@ def logout(request):
 def cicletealo(request):
     if 'id' in request.session:
         user=User.objects.get(id=request.session['id'])   
-        eventos=Evento.objects.all()
+        eventos=Evento.objects.order_by('-id')
         if user:
             context={
                 'user': f'{user.first_name} {user.last_name}',
@@ -167,9 +159,10 @@ def user(request):
     if 'id' in request.session:
         user_id= request.session['id']
         user=User.objects.get(id=user_id)
-      
+        evento= Evento.objects.all()
         context={
-            'users':user
+            'users':user,
+            'evento':evento
         }
         return render(request, 'user.html', context)
     else:
