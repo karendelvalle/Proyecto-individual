@@ -159,7 +159,8 @@ def user(request):
     if 'id' in request.session:
         user_id= request.session['id']
         user=User.objects.get(id=user_id)
-        evento= Evento.objects.all()
+        evento= Evento.objects.filter(creador=user)
+        print(evento)
         context={
             'users':user,
             'evento':evento
@@ -192,11 +193,15 @@ def imprimir(request, id):
         user = User.objects.get(id= request.session.get('id'))  
         eventos=Evento.objects.filter(id=id)[0]
         user_eventos= eventos.users_message.all()
+        lista_eventos=list(user_eventos)
+        lista_eventos.reverse()
+        print(lista_eventos)
         print(user_eventos)
         context={
             'mensajes': user_eventos,
             'users': user,
-            'evento':eventos
+            'evento':eventos,
+            'lista_eventos':lista_eventos
         }
         return render(request, 'mensajes.html', context)
     return redirect("/")

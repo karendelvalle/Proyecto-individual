@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %} <link rel="stylesheet" href="{ static 'css/cicletealo.css'}">
-
-     <div class="jumbotron text-white"  style="background: url(static/img/fondo_bicis.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-
-      <h1>Bienvenido(a)</h1>
-      {% if users %} 
-      <h1 class="text-white">{{user}}:</h1>
-      {% endif %}
-      
-    </div>
+{% block style%} <link rel="stylesheet" href="{% static 'css/cicletealo.css'%}">{% endblock %}
+{% block content %}
+     <div class="jumbotron"  style="background: url(static/img/fondo_bicis.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+        <h1>Bienvenido(a)</h1>
+        {% if users %} 
+        <h1>{{user}}:</h1>
+        {% endif %}    
+      </div>
 
           <table class="table table-bordered table-dark">
             <thead>
@@ -74,7 +72,8 @@
             {% endfor %}
             </tbody>
           </table>
-      {% endblock %}
+{%endblock%}
+  
 
 
 
