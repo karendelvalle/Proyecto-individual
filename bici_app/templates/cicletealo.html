@@ -3,12 +3,11 @@
 {% block style%} <link rel="stylesheet" href="{% static 'css/cicletealo.css'%}">{% endblock %}
 {% block content %}
      <div class="jumbotron"  style="background: url(static/img/foto_portada4.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-        <h1 class="titulo">Bienvenido(a)</h1>
+        <h1>Bienvenido(a)</h1>
         {% if users %} 
         <h1>{{user}}:</h1>
         {% endif %}    
       </div>
-
           <table class="table table-bordered table-dark">
             <thead>
               <tr>

@@ -17,7 +17,7 @@
             {% for evento in users.user_creador.all %}
 
             <table class="table table-bordered table-dark">
-                    <th scope="col">Evento:{{evento.nombre}}</th>
+                    <th scope="col">Evento: {{evento.nombre}}</th>
                     <td>{{evento.encuentro}}</td>
                     <td>{{evento.termino}}</td>    
                     <td>{{evento.ruta}}</td>
@@ -30,7 +30,7 @@
             {% endfor %}
             {%endif%}
                
-            <h2>Eventos a los que me he unido:</h2>
+            <h2 class="unido">Eventos a los que me he unido:</h2>
             {% if not users.user_eventos.all %}
             <h4>/Usted no se ha unido a eventos/</h4>
             {%else%}
