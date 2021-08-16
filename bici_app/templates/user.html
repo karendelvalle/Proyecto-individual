@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-
-
-      {% block content %}
-      <div class="p-3 mb-2 bg-secondary text-white" style="background: url(static/img/bici_playa.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+{% load static %}
+{% block style%} <link rel="stylesheet" href="{% static 'css/user.css'%}">{% endblock %}
+{% block content %}
+      <div class="p-3 mb-2 bg-secondary text-white" style="background: url(static/img/mi_bici_playa.jpg)   no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
       <div class="container">
         <h1>Bienvenid@ ciclista {{users.first_name}}</h1>
         <a href="/cicletealo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
           <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
         </svg></a><br><br>
 
-            <h2>Eventos Creados</h2>  
+            <h2 class="titulo">Eventos Creados:</h2>  
 
             {% if not evento %}   
-            <p> No tiene eventos creados </p>   
+            <h4> /Usted No tiene eventos creados/ </h4>   
               {% else %}
             {% for evento in users.user_creador.all %}
 
@@ -29,11 +29,10 @@
              
             {% endfor %}
             {%endif%}
-            
-                   
-            <h2>Eventos a los que me he unido</h2>
+               
+            <h2>Eventos a los que me he unido:</h2>
             {% if not users.user_eventos.all %}
-            <p>Usted no se ha unido a eventos aún</p>
+            <h4>/Usted no se ha unido a eventos/</h4>
             {%else%}
             {% for evento in users.user_eventos.all %}
               <table class="table table-bordered table-dark">
@@ -61,8 +60,7 @@
                 </tbody>
               </table>
             {% endfor %}
-            {% endif %}
-             
+            {% endif %}    
+      </div>
     </div>
-  </div>
-    {% endblock %}
+{% endblock %}

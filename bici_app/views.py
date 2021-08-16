@@ -1,3 +1,4 @@
+from django.db.models.fields import PositiveIntegerRelDbTypeMixin
 from django.shortcuts import render, redirect
 from .models import Evento, User, Message, Comment
 from django.contrib import messages
@@ -45,7 +46,7 @@ def login(request):
             if bcrypt.checkpw(request.POST['login_password'].encode(), logged_user.password.encode()):
                 request.session['id'] = logged_user.id
                 return redirect("/cicletealo")
-    return redirect("/")
+    return redirect("/register")
 
 def logout(request):
     request.session.clear()
@@ -195,13 +196,16 @@ def imprimir(request, id):
         user_eventos= eventos.users_message.all()
         lista_eventos=list(user_eventos)
         lista_eventos.reverse()
+        comment=Comment.objects.all()
+
         print(lista_eventos)
         print(user_eventos)
         context={
             'mensajes': user_eventos,
             'users': user,
             'evento':eventos,
-            'lista_eventos':lista_eventos
+            'lista_eventos':lista_eventos,
+            'comment':comment
         }
         return render(request, 'mensajes.html', context)
     return redirect("/")
@@ -227,6 +231,14 @@ def delete_mensaje(request,id):
     mensaje= Message.objects.get(id=id)
     mensaje.delete()
     print(mensaje)
+    evento_id=  request.POST.get("evento_id")
+    url= "/imprimir/" + str(evento_id)
+    return redirect(url)
+
+def delete_comentario(request,id):
+    comentario= Comment.objects.get(id=id)
+    comentario.delete()
+    print(comentario)
     evento_id=  request.POST.get("evento_id")
     url= "/imprimir/" + str(evento_id)
     return redirect(url)

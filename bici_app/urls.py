@@ -17,5 +17,6 @@ urlpatterns = [
     path('mensajes/<int:id>', views.mensajes),
     path('comentar_mensaje/<int:id>', views.comentar_mensaje),
     path('imprimir/<int:id>', views.imprimir),
-    path('delete/<int:id>', views.delete_mensaje) 
+    path('delete/<int:id>', views.delete_mensaje),
+    path('delete_comentario/<int:id>', views.delete_comentario)
 ]
