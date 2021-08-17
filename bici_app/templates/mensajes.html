@@ -12,13 +12,15 @@
               </svg></a><br><br>
         </div>
         
-        <div class="container p-3 my-3 bg-dark text-white">     
+        <div class="container p-3 my-3 bg-dark text-white">   
+            {% if request.session.id == evento.creador.id %}  
             <form action="/mensajes/{{evento.id}}" method="POST">
                 {% csrf_token %}
                 <div class="col-md-6">
                 <p>Mensaje: <input type='text' name="mensaje" id="" cols="30" rows="10" class="form-control" id="inputEmail4"></input></p>
                 <input type="submit" value="Enviar"><br><br>
             </form>
+            {%endif%}
                    
                     <!--Imprimir mensajes-->
                     {% if messages %}
@@ -28,7 +30,8 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                    {% for mensaje in lista_eventos %}              
+                    {% for mensaje in lista_eventos %}       
+                           
                     <p class="mensaje">Mensaje de {{mensaje.user.first_name}} {{mensaje.user.last_name}}:</p>
                     <p>*{{mensaje.message}}</p>
                                         <!--BORRAR MENSAJE-->
